@@ -9,6 +9,8 @@ function resolve (dir) {
 
 const name = 'vue mi note' // page title
 
+const themePath = path.resolve(__dirname, 'src/common/style/index.less')
+
 const port = process.env.port || process.env.npm_config_port || 9000 // dev port
 
 module.exports = {
@@ -88,7 +90,13 @@ module.exports = {
       )
   },
   css: {
+    requireModuleExtension: true,
     loaderOptions: {
+      less: {
+        modifyVars: {
+          hack: `true; @import "${themePath}";`
+        }
+      },
       postcss: {
         plugins: [
           autoprefixer(),

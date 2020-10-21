@@ -1,28 +1,36 @@
 <template>
   <div class="nav-bar__wrapper">
-    <van-row type="flex">
-      <van-col span="6"><router-link tag="span" to="/home">便签</router-link></van-col>
-      <van-col span="6"><router-link tag="span" to="/todolist">待办</router-link></van-col>
-    </van-row>
+    <ul class="nav-bar">
+      <router-link tag="li" to="/home">便签
+        <van-icon name="arrow-down"/>
+      </router-link>
+      <router-link tag="li" to="/todolist">待办</router-link>
+    </ul>
   </div>
 </template>
 
 <script>
-import { Col, Row } from 'vant'
-
-export default {
-  name: 'NavBar',
-  components: {
-    [Col.name]: Col,
-    [Row.name]: Row
+  export default {
+    name: 'NavBar'
   }
-}
 </script>
 
 <style lang="less" scoped>
-  @import "../../style/var.less";
   .nav-bar__wrapper {
-    font-size: @font-size-md;
-    text-align: center;
+    color: @text-color;
+    font-size: @font-size-lg-xx;
+
+    .nav-bar {
+      .fj(center);
+      padding: 16px 0;
+
+      li {
+        padding: 0 12px;
+
+        &.router-link-active {
+          color: @black;
+        }
+      }
+    }
   }
 </style>

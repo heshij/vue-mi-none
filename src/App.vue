@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <nav-bar/>
+    <my-header/>
     <router-view/>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar/NavBar.vue'
+import MyHeader from './components/MyHearder/MyHeader'
 export default {
   name: 'app',
   components: {
-    NavBar
+    MyHeader
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 </style>

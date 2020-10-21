@@ -5,7 +5,46 @@ import router from './router'
 import store from './store'
 import 'amfe-flexible'
 import FastClick from 'fastclick'
-import 'normalize.css/normalize.css'
+import './common/style/base.css'
+
+import {
+  Popup,
+  Overlay,
+  Loading,
+  Dialog,
+  Form,
+  Field,
+  SwipeCell,
+  Icon,
+  Checkbox,
+  CheckboxGroup,
+  Button,
+  PullRefresh,
+  List,
+  Tab,
+  Tabs,
+  Toast,
+  DatetimePicker
+} from 'vant'
+
+Vue
+  .use(Popup)
+  .use(Overlay)
+  .use(Loading)
+  .use(Dialog)
+  .use(Toast)
+  .use(Form)
+  .use(Field)
+  .use(SwipeCell)
+  .use(Icon)
+  .use(Button)
+  .use(PullRefresh)
+  .use(List)
+  .use(Tab)
+  .use(Tabs)
+  .use(Checkbox)
+  .use(CheckboxGroup)
+  .use(DatetimePicker)
 
 /**
  * If you don't want to use mock-server
