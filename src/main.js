@@ -24,7 +24,9 @@ import {
   Tab,
   Tabs,
   Toast,
-  DatetimePicker
+  DatetimePicker,
+  Image as VanImage,
+  Lazyload
 } from 'vant'
 
 Vue
@@ -45,6 +47,8 @@ Vue
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(DatetimePicker)
+  .use(VanImage)
+  .use(Lazyload)
 
 /**
  * If you don't want to use mock-server

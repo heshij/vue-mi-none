@@ -18,14 +18,26 @@
 <style lang="less" scoped>
   .nav-bar__wrapper {
     color: @text-color;
-    font-size: @font-size-lg-xx;
 
     .nav-bar {
-      .fj(center);
-      padding: 16px 0;
+      .fj(flex-start);
+      padding: 6px 0 12px 32px;
 
       li {
         padding: 0 12px;
+        font-size: @font-size-lg-xxx;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @{deep} .van-icon {
+          font-size: @font-size-lg-x;
+          margin-left: 6px;
+          font-weight: 700;
+        }
+
+        /*transition: font-size .5S;*/
 
         &.router-link-active {
           color: @black;
