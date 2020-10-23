@@ -26,7 +26,8 @@ import {
   Toast,
   DatetimePicker,
   Image as VanImage,
-  Lazyload
+  Lazyload,
+  Skeleton
 } from 'vant'
 
 Vue
@@ -49,6 +50,7 @@ Vue
   .use(DatetimePicker)
   .use(VanImage)
   .use(Lazyload)
+  .use(Skeleton)
 
 /**
  * If you don't want to use mock-server

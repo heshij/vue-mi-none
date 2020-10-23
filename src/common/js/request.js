@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { Dialog, Notify } from 'vant'
 import axios from 'axios'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { getToken } from '@/common/js/auth'
 
 // 全局注册
 Vue.use(Dialog)
