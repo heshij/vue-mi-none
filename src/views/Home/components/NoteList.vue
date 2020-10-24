@@ -1,5 +1,4 @@
 <template>
-  <van-skeleton title avatar :row="2" :loading="loading">
     <li class="view">
       <div class="view-txt">
         <h2 class="van-multi-ellipsis--l3">{{noteList.title}}</h2>
@@ -12,7 +11,6 @@
                  class="van-hairline--surround">
       </van-image>
     </li>
-  </van-skeleton>
 </template>
 
 <script>
@@ -24,10 +22,6 @@
         default: () => {
           return {}
         }
-      },
-      loading: {
-        type: Boolean,
-        default: true
       }
     },
     methods: {}
@@ -35,14 +29,6 @@
 </script>
 
 <style scoped lang="less">
-  @{deep} .van-skeleton__row, .van-skeleton__title {
-    height: 16px;
-    background-color: #ececec;
-  }
-  @{deep} .van-skeleton__avatar {
-    background-color: #ececec;
-  }
-
   .view {
     background-color: @white;
     padding: 16px 22px 20px 22px;

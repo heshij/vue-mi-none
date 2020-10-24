@@ -38,6 +38,8 @@
     background-color: @header-background-color;
     padding-top: 60px;
     /*transition: all .3S;*/
+    position: relative;
+    z-index: 99;
   }
 
   .fixed-header {
