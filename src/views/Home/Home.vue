@@ -1,20 +1,7 @@
 <template>
   <div class="home">
-    <base-scroll :scroll-data="noteList" :pulldown="true" :pullingDown="pulldown" ref="scroll">
+    <base-scroll :data="noteList" ref="scroll" :options="options">
       <ul id="note-list--wrapper" class="note-list--wrapper">
-        <div class="pulldown-wrapper">
-          <div v-show="beforePullDown">
-            <span>Pull Down and refresh</span>
-          </div>
-          <div v-show="!beforePullDown">
-            <div v-show="isPullingDown">
-              <span>Loading...</span>
-            </div>
-            <div v-show="!isPullingDown">
-              <span>Refresh success</span>
-            </div>
-          </div>
-        </div>
         <note-list v-for="item in noteList" :key="item.id" :note-list="item"></note-list>
       </ul>
     </base-scroll>
@@ -35,14 +22,15 @@
     },
     data () {
       return {
+        options: {
+          pullDownRefresh: true
+        },
         noteList: [],
         total: 0,
         listQuery: {
           page: 1,
           limit: 20
-        },
-        beforePullDown: true,
-        isPullingDown: false
+        }
       }
     },
     computed: {},
@@ -66,7 +54,7 @@
     },
     methods: {
       pulldown () {
-        console.log('下拉')
+        console.log('下拉22')
       },
       getList () {
         this.$toast.loading({
@@ -100,15 +88,7 @@
       height: 556px;
 
       .pulldown-wrapper {
-        position: absolute;
-        z-index: 1;
-        width: 100%;
-        padding: 20px;
-        box-sizing: border-box;
-        transform: translateY(-100%) translateZ(0);
-        text-align: center;
-        color: #999;
-        font-size: @font-size-md;
+
       }
     }
 
