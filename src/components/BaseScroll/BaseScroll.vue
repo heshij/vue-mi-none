@@ -19,7 +19,7 @@
             <div v-show="isPullingDown" class="loading">
               <van-loading type="spinner" size="24px"/>
             </div>
-            <div v-show="!isPullingDown" class="cube-pulldown-loaded"><span>{{ refreshTxt }}</span></div>
+            <div v-show="!isPullingDown" class="pulldown-loaded"><span>{{ refreshTxt }}</span></div>
           </div>
         </div>
       </slot>
@@ -455,6 +455,7 @@
 
 <style scoped lang="less">
   .scroll-wrapper {
+    position: relative;
     width: 100%;
     height: 100%;
     overflow: hidden;
@@ -467,6 +468,7 @@
       position: absolute;
       width: 100%;
       left: 0;
+      z-index: 9999;
       display: -webkit-box;
       display: -webkit-flex;
       display: flex;
