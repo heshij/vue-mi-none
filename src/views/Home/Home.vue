@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <base-scroll :data="noteList" ref="scroll" :options="options">
+    <base-scroll :data="noteList" ref="scroll" :options="options" @pullingDown="pullingDown">
       <ul id="note-list--wrapper" class="note-list--wrapper">
         <note-list v-for="item in noteList" :key="item.id" :note-list="item"></note-list>
       </ul>
@@ -53,8 +53,8 @@
       // })
     },
     methods: {
-      pulldown () {
-        console.log('下拉22')
+      pullingDown () {
+        this.getList()
       },
       getList () {
         this.$toast.loading({

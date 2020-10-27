@@ -1,28 +1,28 @@
 <template>
   <div class="scroll-wrapper" ref="wrapper">
     <div ref="listWrapper" class="scroll-list-wrapper">
-      <div v-if="pullDownRefresh" class="pulldown" ref="pulldown">
-        <slot
-          name="pulldown"
-          :pullDownRefresh="pullDownRefresh"
-          :pullDownStyle="pullDownStyle"
-          :beforePullDown="beforePullDown"
-          :isPullingDown="isPullingDown"
-          :bubbleY="bubbleY">
-          <div class="pulldown-wrapper" :style="pullDownStyle">
-            <div class="before-trigger" v-show="beforePullDown">
-              <bubble :y="bubbleY" class="bubble"></bubble>
-            </div>
-            <div class="after-trigger" v-show="!beforePullDown">
-              <div v-show="isPullingDown" class="loading">
-                <van-loading type="spinner" size="24px"/>
-              </div>
-              <div v-show="!isPullingDown" class="pulldown-loaded"><span>{{ refreshTxt }}</span></div>
-            </div>
-          </div>
-        </slot>
-      </div>
       <slot></slot>
+    </div>
+    <div v-if="pullDownRefresh" class="pulldown" ref="pulldown">
+      <slot
+        name="pulldown"
+        :pullDownRefresh="pullDownRefresh"
+        :pullDownStyle="pullDownStyle"
+        :beforePullDown="beforePullDown"
+        :isPullingDown="isPullingDown"
+        :bubbleY="bubbleY">
+        <div class="pulldown-wrapper" :style="pullDownStyle">
+          <div class="before-trigger" v-show="beforePullDown">
+            <bubble :y="bubbleY" class="bubble"></bubble>
+          </div>
+          <div class="after-trigger" v-show="!beforePullDown">
+            <div v-show="isPullingDown" class="loading">
+              <van-loading type="spinner" size="24px"/>
+            </div>
+            <div v-show="!isPullingDown" class="pulldown-loaded"><span>{{ refreshTxt }}</span></div>
+          </div>
+        </div>
+      </slot>
     </div>
   </div>
 </template>
@@ -47,13 +47,12 @@
   const DEFAULT_REFRESH_TXT = 'Refresh success'
   const DEFAULT_STOP_TIME = 600
 
-  // eslint-disable-next-line no-unused-vars
   const EVENT_CLICK = 'click'
-  const EVENT_PULLING_DOWN = 'pullingDown'
+  const EVENT_PULLING_DOWN = 'pulling-down'
 
   const EVENT_SCROLL = 'scroll'
-  const EVENT_BEFORE_SCROLL_START = 'beforeScrollStart'
-  const EVENT_SCROLL_END = 'scrollEnd'
+  const EVENT_BEFORE_SCROLL_START = 'before-scroll-start'
+  const EVENT_SCROLL_END = 'scroll-end'
 
   const NEST_MODE_NONE = 'none'
   const NEST_MODE_NATIVE = 'native'
@@ -183,6 +182,7 @@
         return finalScrollEvents
       },
       needListenScroll () {
+        // f
         return this.finalScrollEvents.indexOf(EVENT_SCROLL) !== -1 || this.parentScroll
       }
     },
@@ -412,9 +412,8 @@
           return
         }
         pulldown = pulldown.firstChild
-        // console.log(pulldown)
         this.pullDownHeight = getRect(pulldown).height
-        // console.log(this.pullDownHeight)
+        console.log(this.pullDownHeight)
         this.beforePullDown = false
         this.isPullingDown = true
         this.$nextTick(() => {
