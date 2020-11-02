@@ -11,7 +11,14 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: () => import(/* webpackChunkName: "home" */ '../views/Home/Home.vue')
+    component: () => import(/* webpackChunkName: "home" */ '../views/Home/Home.vue'),
+    children: [
+      {
+        path: ':id',
+        component: () => import(/* webpackChunkName: "note-detail" */ '../views/Home/NoteDetail.vue')
+      }
+    ]
+
   },
   {
     path: '/todolist',

@@ -12,8 +12,8 @@
     },
     data() {
       return {
-        width: 50,
-        height: 80
+        width: 40,
+        height: 60
       }
     },
     computed: {
@@ -34,9 +34,9 @@
       this.initArrowRadius = 10 * this.ratio
       this.minArrowRadius = 6 * this.ratio
       this.arrowWidth = 3 * this.ratio
-      this.maxDistance = 40 * this.ratio
-      this.initCenterX = 25 * this.ratio
-      this.initCenterY = 25 * this.ratio
+      this.maxDistance = 30 * this.ratio
+      this.initCenterX = 20 * this.ratio
+      this.initCenterY = 20 * this.ratio
       this.headCenter = {
         x: this.initCenterX,
         y: this.initCenterY

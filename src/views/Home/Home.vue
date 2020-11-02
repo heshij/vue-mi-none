@@ -2,9 +2,10 @@
   <div class="home">
     <base-scroll :data="noteList" ref="scroll" :options="options" @pullingDown="pullingDown">
       <ul id="note-list--wrapper" class="note-list--wrapper">
-        <note-list v-for="item in noteList" :key="item.id" :note-list="item"></note-list>
+        <note-list v-for="item in noteList" :key="item.id" :note-list="item" @select-item="goListDetail(item.id)"></note-list>
       </ul>
     </base-scroll>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -55,6 +56,12 @@
     methods: {
       pullingDown () {
         this.getList()
+        console.log(1)
+      },
+      goListDetail (id) {
+        this.$router.push({
+          path: `/Home/${id}`
+        })
       },
       getList () {
         this.$toast.loading({
@@ -83,6 +90,7 @@
   .home {
     background-color: @body-background-color;
     padding-bottom: 60px;
+    position: relative;
 
     @{deep} .scroll-wrapper {
       height: 556px;

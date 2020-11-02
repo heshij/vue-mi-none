@@ -1,16 +1,16 @@
 <template>
-    <li class="view">
-      <div class="view-txt">
-        <h2 class="van-multi-ellipsis--l3">{{noteList.title}}</h2>
-        <span>{{noteList.display_time}}</span>
-      </div>
-      <van-image width="54"
-                 height="54"
-                 lazy-load
-                 :src="noteList.image_uri"
-                 class="van-hairline--surround">
-      </van-image>
-    </li>
+  <li class="view" @click="clickItem()">
+    <div class="view-txt">
+      <h2 class="van-multi-ellipsis--l3">{{noteList.title}}</h2>
+      <span>{{noteList.display_time}}</span>
+    </div>
+    <van-image width="54"
+               height="54"
+               lazy-load
+               :src="noteList.image_uri"
+               class="van-hairline--surround">
+    </van-image>
+  </li>
 </template>
 
 <script>
@@ -24,7 +24,11 @@
         }
       }
     },
-    methods: {}
+    methods: {
+      clickItem (item) {
+        this.$emit('select-item', item)
+      }
+    }
   }
 </script>
 

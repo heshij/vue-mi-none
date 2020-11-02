@@ -105,18 +105,6 @@
           })
         }
       },
-      // TODO: plan to remove at 1.10.0
-      listenScroll: {
-        type: Boolean,
-        default: false
-      },
-      listenBeforeScroll: {
-        type: Boolean,
-        default: undefined,
-        deprecated: {
-          replacedBy: 'scroll-events'
-        }
-      },
       direction: {
         type: String,
         default: DIRECTION_V
@@ -124,16 +112,6 @@
       nestMode: {
         type: String,
         default: NEST_MODE_NONE
-      },
-      // 是否派发滚动到底部的事件，用于上拉加载
-      pullup: {
-        type: Boolean,
-        default: false
-      },
-      // 是否派发顶部下拉的事件，用于下拉刷新
-      pulldown: {
-        type: Boolean,
-        default: false
       },
       // 是否派发列表滚动开始的事件
       beforeScroll: {
@@ -176,10 +154,10 @@
       finalScrollEvents () {
         const finalScrollEvents = this.scrollEvents.slice()
 
-        if (!finalScrollEvents.length) {
-          this.listenScroll && finalScrollEvents.push(EVENT_SCROLL)
-          this.listenBeforeScroll && finalScrollEvents.push(EVENT_BEFORE_SCROLL_START)
-        }
+        // if (!finalScrollEvents.length) {
+        //   this.listenScroll && finalScrollEvents.push(EVENT_SCROLL)
+        //   this.listenBeforeScroll && finalScrollEvents.push(EVENT_BEFORE_SCROLL_START)
+        // }
         return finalScrollEvents
       },
       needListenScroll () {
@@ -198,14 +176,13 @@
           return
         }
 
+        // 最小高度计算
         this._calculateMinHeight()
 
         const options = Object.assign({}, DEFAULT_OPTIONS, {
           scrollY: this.direction === DIRECTION_V,
           scrollX: this.direction === DIRECTION_H,
           probeType: this.needListenScroll ? 3 : 1,
-          pullDownRefresh: this.pulldown,
-          pullUpLoad: this.pullup,
           scrollbar: this.scrollbar,
           nestedScroll: false
         }, this.options)
@@ -290,7 +267,7 @@
         // waiting scroll initial
         this.$nextTick(() => {
           const innerScroll = this.bscroll
-          const outerScroll = this.parentScroll.scroll
+          const outerScroll = this.parentScroll.bscroll
           const scrolls = [innerScroll, outerScroll]
           scrolls.forEach((scroll, index, arr) => {
             // scroll ended always enable them
@@ -337,6 +314,31 @@
           })
         })
       },
+      _checkReachBoundary(pos) {
+        const distX = this.bscroll.distX
+        const distY = this.bscroll.distY
+        const reachBoundaryX = distX > 0 ? pos.x >= this.scroll.minScrollX : distX < 0 ? pos.x <= this.scroll.maxScrollX : false
+        const reachBoundaryY = distY > 0 ? pos.y >= this.scroll.minScrollY : distY < 0 ? pos.y <= this.scroll.maxScrollY : false
+        const freeScroll = this.scroll.freeScroll
+        const hasHorizontalScroll = this.scroll.hasHorizontalScroll
+        const hasVerticalScroll = this.scroll.hasVerticalScroll
+
+        if (!hasHorizontalScroll && !hasVerticalScroll) {
+          return true
+        }
+
+        if (freeScroll) {
+          return reachBoundaryX || reachBoundaryY
+        }
+
+        let reachBoundary
+        if (this.scroll.movingDirectionX) {
+          reachBoundary = reachBoundaryX
+        } else if (this.scroll.movingDirectionY) {
+          reachBoundary = reachBoundaryY
+        }
+        return reachBoundary
+      },
       _calculateMinHeight () {
         const { wrapper, listWrapper } = this.$refs
         const pullUpLoad = this.pullUpLoad
@@ -381,11 +383,11 @@
         if (this.beforePullDown) {
           this.bubbleY = Math.max(0, pos.y - this.pullDownHeight)
           this.pullDownStyle = `top:${Math.min(pos.y - this.pullDownHeight, 0)}px`
-          console.log(this.pullDownStyle)
+          // console.log(this.pullDownStyle)
         } else {
           this.bubbleY = 0
           this.pullDownStyle = `top:${Math.min(pos.y - this.pullDownStop, 0)}px`
-          console.log(this.pullDownStyle)
+          // console.log(this.pullDownStyle)
         }
       },
       _waitFinishPullDown (next) {
